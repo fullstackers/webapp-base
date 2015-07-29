@@ -1,0 +1,20 @@
+{
+  "name": "webapp-base",
+  "version": "0.0.0",
+  "authors": [
+    "Paul Forbes <paulforbes42@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "~1.4.3",
+    "angular-mocks": "~1.4.3",
+    "ui-router": "~0.2.15"
+  }
+}

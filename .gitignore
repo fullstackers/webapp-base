@@ -1,0 +1,7 @@
+*.swp
+*.swo
+generated/
+dist/
+bower_components/
+node_modules/
+npm-debug.log
