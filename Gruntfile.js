@@ -52,7 +52,8 @@ module.exports = function(grunt) {
                 // Copy image files from the img/ directory to the img/ directory of generated/
                 {
                     expand: true,
-                    src: ['app/img/**/*.png'],
+                    flatten: true,
+                    src: ['app/img/**/*.png', 'app/img/**/*.jpg'],
                     dest: 'generated/img/'
                 }]
             },
