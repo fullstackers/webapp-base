@@ -5,6 +5,7 @@ Have a working AngularJS application up and running in minutes.
 * Bootstrap
 * Less
 
+## Setup Instructions
 ```
 // Install the NodeJS dependencies
 npm install
