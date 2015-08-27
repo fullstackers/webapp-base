@@ -1,6 +1,11 @@
-= Steps to build the Web Application for the first time
+Have a working AngularJS application up and running in minutes.
 
-===
+* AngularJS
+* ui-router
+* Bootstrap
+* Less
+
+```
 // Install the NodeJS dependencies
 npm install
 
@@ -12,6 +17,9 @@ grunt build
 
 // Start the web server
 node index.js
-===
+
+// Watch for changes to the code
+grunt watch
+```
 
 Now, direct your browser to http://localhost:3000/

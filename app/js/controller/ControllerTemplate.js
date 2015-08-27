@@ -3,10 +3,10 @@
 
     ng
         .module('app')
-        .controller('TestController', ['$scope', function($scope) {
+        .controller('TestController', ['$scope', 'TestService', function($scope, TestService) {
 
             $scope.setTitle = function() {
-                $scope.title = 'Test';
+                $scope.title = TestService.getTitle();
             };
 
         }])

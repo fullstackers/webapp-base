@@ -53,17 +53,12 @@ module.exports = function(grunt) {
                 {
                     expand: true,
                     flatten: true,
-                    src: ['app/img/**/*.png', 'app/img/**/*.jpg'],
+                    src: ['app/img/**/*'],
                     dest: 'generated/img/'
                 }]
             },
             dist: {
                 files: [{
-                    expand: true,
-                    flatten: true,
-                    src: 'generated/js/app.js',
-                    dest: 'dist/js/'
-                }, {
                     expand: true,
                     flatten: true,
                     src: 'generated/*.html',
@@ -168,7 +163,7 @@ module.exports = function(grunt) {
         uglify: {
             dist: {
                 files: {
-                    'dist/js/app.min.js': 'dist/js/app.js'
+                    'dist/js/app.js': 'generated/js/app.js'
                 }
             }
         },
