@@ -28,6 +28,8 @@ module.exports = function(grunt) {
                     separator: ';'
                 },
                 src: [
+                    'bower_components/jquery/dist/jquery.js',
+                    'bower_components/bootstrap/dist/js/bootstrap.js',
                     'bower_components/angular/angular.js',
                     'bower_components/ui-router/release/angular-ui-router.js',
                     'app/js/**/*.js', 
