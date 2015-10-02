@@ -4,6 +4,6 @@
     ng
         .module('app', ['ui.router', 'templates-generated'])
         .config(['$urlRouterProvider', function($urlRouterProvider) {
-            $urlRouterProvider.otherwise('/');
+            $urlRouterProvider.otherwise('/dashboard');
         }]);
 })(angular);

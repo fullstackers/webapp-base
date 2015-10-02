@@ -11,6 +11,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-html2js');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-mkdir');
+    grunt.loadNpmTasks('grunt-ngdocs');
     grunt.loadNpmTasks('grunt-notify');
 
     grunt.initConfig({
@@ -151,6 +152,14 @@ module.exports = function(grunt) {
             }
         },
 
+        ngdocs: {
+            options: {
+                dest: 'docs',
+                startPage: '/api/app.controller:DashboardController'
+            },
+            all: ['app/js/**/*.js']
+        },
+
         // Display OS specific errors on the developers PC when a grunt build fails
         notify_hooks: {
             options: {
@@ -174,8 +183,12 @@ module.exports = function(grunt) {
         // during development.
         watch: {
             dev: {
-                files: ['app/**/*.js', 'app/**/*.less', 'app/**/*.html', 'app/**/*.json', 'test/spec/**/*.js'],
+                files: ['app/**/*.js', 'app/**/*.less', 'app/**/*.html', 'app/**/*.json'],
                 tasks: ['build']
+            },
+            test: {
+                files: ['test/spec/**/*.js'],
+                tasks: ['test']
             }
         }
     });

@@ -2,6 +2,7 @@
 *.swo
 generated/
 dist/
+docs/
 bower_components/
 node_modules/
 npm-debug.log
