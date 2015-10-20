@@ -93,7 +93,7 @@ module.exports = function(grunt) {
 
         // Validate our JavaScript code with JSHint
         jshint: {
-            all: ['app/js/**/*.js']
+            all: ['app/js/**/*.js', 'test/spec/**/*.js']
         },
 
         karma: {
