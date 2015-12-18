@@ -58,6 +58,13 @@ module.exports = function(grunt) {
                     flatten: true,
                     src: ['app/img/**/*'],
                     dest: 'generated/img/'
+                }, 
+                // Copy bootstrap fonts to the generated directory 
+                {
+                    expand: true,
+                    flatten: true,
+                    src: ['bower_components/bootstrap/fonts/**/*'],
+                    dest: 'generated/fonts'  
                 }]
             },
             dist: {
@@ -68,8 +75,14 @@ module.exports = function(grunt) {
                     dest: 'dist/'
                 }, {
                     expand: true,
+                    flatten: true,
                     src: ['app/img/**/*'],
-                    dest: 'dist/img/'
+                    dest: 'dist/img'
+                }, {
+                    expand: true,
+                    flatten: true,
+                    src: ['generated/fonts/**/*'],
+                    dest: 'dist/fonts'  
                 }]
             }
         },
@@ -142,12 +155,12 @@ module.exports = function(grunt) {
         mkdir: {
             generated: {
                 options: {
-                    create: ['generated', 'generated/js', 'generated/css', 'generated/img']
+                    create: ['generated', 'generated/js', 'generated/css', 'generated/img', 'generated/fonts']
                 }
             },
             dist: {
                 options: {
-                    create: ['dist', 'dist/js', 'dist/css', 'dist/img']
+                    create: ['dist', 'dist/js', 'dist/css', 'dist/img', 'dist/fonts']
                 }
             }
         },
@@ -189,6 +202,12 @@ module.exports = function(grunt) {
             test: {
                 files: ['test/spec/**/*.js'],
                 tasks: ['test']
+            },
+            grunt: {
+                files: ['Gruntfile.js'],
+                options: {
+                    reload: true
+                }
             }
         }
     });
