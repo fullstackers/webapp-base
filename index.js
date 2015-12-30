@@ -7,6 +7,10 @@ var path = require('path'),
 
 app.use(express.static(staticPath));
 
+app.all('/*', function(req, res) {
+    res.sendFile(staticPath + '/index.html');
+});
+
 app.listen(port, function() {
     console.log('Web Application Static Server Started');
     console.log('Port:', port);

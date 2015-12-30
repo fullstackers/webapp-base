@@ -3,14 +3,16 @@
 
     ng
         .module('app', ['ui.router', 'templates-generated'])
-        .run(['$rootScope', '$document', function($rootScope, $document) {
+        .run(['$rootScope', '$window', function($rootScope, $window) {
         
             // Scroll to the top of the page each time a new page loads
             $rootScope.$on('$stateChangeSuccess', function() {
-                $document.body.scrollTop = $document.documentElement.scrollTop = 0;
+                $window.scrollTo(0, 0);
             });
         }])
-        .config(['$urlRouterProvider', function($urlRouterProvider) {
+        .config(['$urlRouterProvider', '$locationProvider', function($urlRouterProvider, $locationProvider) {
             $urlRouterProvider.otherwise('/dashboard');
+            $locationProvider.html5Mode(true).hashPrefix('!');
         }]);
+
 })(angular);
