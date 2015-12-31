@@ -10,7 +10,7 @@ var path = require('path'),
 app.use(compression());
 
 // serve static content
-app.use(express.static(staticPath));
+app.use(express.static(staticPath, { maxAge: 2592000000 }));
 
 // Support HTML5 Mode for the AngularJS app
 app.all('/*', function(req, res) {
