@@ -2,7 +2,7 @@ var path = require('path'),
     express = require('express'),
     compression = require('compression'),
     app = express(),
-    port = process.env.PORT || 3000,
+    port = process.env.PORT || 4000,
     staticDirectory = process.env.NODE_ENV === 'production' ? 'dist' : 'generated',
     staticPath = path.join(__dirname, staticDirectory);
 
