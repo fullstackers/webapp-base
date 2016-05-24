@@ -143,7 +143,7 @@ module.exports = function(grunt) {
                         'app/js/**/*.config.js',
                         'app/js/**/*.run.js',
                         'app/js/**/*.js',
-                        'app/template/**/*.html'
+                        'app/**/*.html'
                     ],
                     coverageReporter: {
                         reporters: [{
@@ -152,12 +152,10 @@ module.exports = function(grunt) {
                     },
                     reporters: ['progress', 'coverage'],
                     preprocessors: {
-                        'app/template/**/*.html': 'ng-html2js',
+                        'app/**/*.html': 'ng-html2js',
                         'app/js/**/!(*spec).js': 'coverage'
                     },
                     ngHtml2JsPreprocessor: {
-                        stripPrefix: 'app/template/',
-                        prependPrefix: '../app/template/',
                         moduleName: 'templates-generated'
                     }
                 }
@@ -168,7 +166,7 @@ module.exports = function(grunt) {
         less: {
             generated: {
                 files: {
-                    'generated/css/app.css': ['app/less/app.less']
+                    'generated/css/app.css': ['app/less/app.less', 'app/**/*.less']
                 }
             }
         },
