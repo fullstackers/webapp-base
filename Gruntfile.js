@@ -30,7 +30,11 @@ module.exports = function(grunt) {
             },
             client: {
                 src: [
-                    'app/js/**/*.js'
+                    'app/js/**/*.module.js',
+                    'app/js/**/*.config.js',
+                    'app/js/**/*.run.js',
+                    'app/js/**/*.js',
+                    '!app/js/**/*.spec.js'
                 ],
                 dest: 'generated/js/client.js'
             },
@@ -115,14 +119,14 @@ module.exports = function(grunt) {
                 }
             },
             generated: {
-                src: ['app/template/**/*.html'],
+                src: ['app/js/**/*.html'],
                 dest: 'generated/js/angular-templates.js'
             }
         },
 
         // Validate our JavaScript code with JSHint
         jshint: {
-            all: ['app/js/**/*.js', 'test/spec/**/*.js']
+            all: ['app/js/**/*.js']
         },
 
         karma: {
@@ -135,9 +139,11 @@ module.exports = function(grunt) {
                         'bower_components/angular/angular.js',
                         'bower_components/ui-router/release/angular-ui-router.js',
                         'bower_components/angular-mocks/angular-mocks.js',
+                        'app/js/**/*.module.js',
+                        'app/js/**/*.config.js',
+                        'app/js/**/*.run.js',
                         'app/js/**/*.js',
-                        'app/template/**/*.html',
-                        'test/spec/**/*.js'
+                        'app/template/**/*.html'
                     ],
                     coverageReporter: {
                         reporters: [{
@@ -147,7 +153,7 @@ module.exports = function(grunt) {
                     reporters: ['progress', 'coverage'],
                     preprocessors: {
                         'app/template/**/*.html': 'ng-html2js',
-                        'app/js/**/*.js': 'coverage'
+                        'app/js/**/!(*spec).js': 'coverage'
                     },
                     ngHtml2JsPreprocessor: {
                         stripPrefix: 'app/template/',

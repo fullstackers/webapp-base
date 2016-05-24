@@ -6,7 +6,7 @@
      * @name app.service:TestService
      * @description
      * The `TestService` represents a template for creating services within webapp-base
-     */    
+     */
     ng
         .module('app')
         .factory('TestService', TestService);

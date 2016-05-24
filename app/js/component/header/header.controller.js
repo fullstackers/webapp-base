@@ -1,6 +1,6 @@
 (function(ng) {
     "use strict";
-    
+
     /**
      * @ngdoc controller
      * @name app.controller:HeaderController

@@ -1,4 +1,4 @@
-describe('app.js', function() {
+describe('app', function() {
     "use strict";
 
     var $rootScope, $window;
