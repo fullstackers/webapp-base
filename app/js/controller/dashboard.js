@@ -9,9 +9,7 @@
      */
     ng
         .module('app')
-        .controller('DashboardController', [function() {
-            
-        }])
+        .controller('DashboardController', DashboardController)
         .config(['$stateProvider', function($stateProvider) {
             $stateProvider
                 .state('dashboard', {
@@ -20,5 +18,10 @@
                     templateUrl: '../app/template/dashboard.html'
                 });
         }]);
+
+    /* @ngInject */
+    function DashboardController() {
+
+    }
 
 })(angular);

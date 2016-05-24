@@ -11,6 +11,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-html2js');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-mkdir');
+    grunt.loadNpmTasks('grunt-ng-annotate');
     grunt.loadNpmTasks('grunt-ngdocs');
     grunt.loadNpmTasks('grunt-notify');
 
@@ -24,6 +25,15 @@ module.exports = function(grunt) {
 
         // Concatenate JavaScript files together into a single file
         concat: {
+            options: {
+                separator: ';'
+            },
+            client: {
+                src: [
+                    'app/js/**/*.js'
+                ],
+                dest: 'generated/js/client.js'
+            },
             generated: {
                 options: {
                     separator: ';'
@@ -33,7 +43,7 @@ module.exports = function(grunt) {
                     'bower_components/bootstrap/dist/js/bootstrap.js',
                     'bower_components/angular/angular.js',
                     'bower_components/ui-router/release/angular-ui-router.js',
-                    'app/js/**/*.js', 
+                    'generated/js/client.js',
                     'generated/js/angular-templates.js'
                 ],
                 dest: 'generated/js/app.js'
@@ -98,6 +108,12 @@ module.exports = function(grunt) {
 
         // Convert Angular Templates to JavaScript
         html2js: {
+            options: {
+                htmlmin: {
+                    collapseWhitespace: true,
+                    removeComments: true
+                }
+            },
             generated: {
                 src: ['app/template/**/*.html'],
                 dest: 'generated/js/angular-templates.js'
@@ -165,6 +181,17 @@ module.exports = function(grunt) {
             }
         },
 
+        ngAnnotate: {
+            options: {
+                remove: true,
+            },
+            generated: {
+                files: {
+                    'generated/js/client.js': ['generated/js/client.js']
+                }
+            }
+        },
+
         ngdocs: {
             options: {
                 dest: 'docs',
@@ -212,7 +239,7 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('build', ['jshint', 'mkdir:generated', 'html2js:generated', 'concat:generated', 'less:generated', 'copy:generated', 'karma']);
+    grunt.registerTask('build', ['jshint', 'mkdir:generated', 'html2js:generated', 'concat:client', 'ngAnnotate:generated', 'concat:generated', 'less:generated', 'copy:generated', 'karma']);
     grunt.registerTask('dist', ['build', 'mkdir:dist', 'copy:dist', 'uglify:dist', 'cssmin:dist']);
     grunt.registerTask('test', ['jshint', 'karma']);
 

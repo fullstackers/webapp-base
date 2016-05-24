@@ -12,11 +12,13 @@
      */
     ng
         .module('app')
-        .controller('HeaderController', ['$scope', '$rootScope', function($scope, $rootScope) {
+        .controller('HeaderController', HeaderController);
 
-            $rootScope.$on('$stateChangeStart', function() {
-                $scope.showMenu = false;
-            });
-        }]);
+    /* @ngInject */
+    function HeaderController($scope, $rootScope) {
+        $rootScope.$on('$stateChangeStart', function() {
+            $scope.showMenu = false;
+        });
+    }
 
 })(angular);
