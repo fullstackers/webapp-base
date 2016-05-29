@@ -11,7 +11,7 @@
             .state('dashboard', {
                 controller: 'DashboardController',
                 url: '/dashboard',
-                templateUrl: '../app/js/view/dashboard/dashboard.html'
+                templateUrl: '../app/view/dashboard/dashboard.html'
             });
     }
 })(angular);

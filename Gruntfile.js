@@ -30,11 +30,11 @@ module.exports = function(grunt) {
             },
             client: {
                 src: [
-                    'app/js/**/*.module.js',
-                    'app/js/**/*.config.js',
-                    'app/js/**/*.run.js',
-                    'app/js/**/*.js',
-                    '!app/js/**/*.spec.js'
+                    'app/**/*.module.js',
+                    'app/**/*.config.js',
+                    'app/**/*.run.js',
+                    'app/**/*.js',
+                    '!app/**/*.spec.js'
                 ],
                 dest: 'generated/js/client.js'
             },
@@ -117,14 +117,14 @@ module.exports = function(grunt) {
                 }
             },
             generated: {
-                src: ['app/js/**/*.html'],
+                src: ['app/**/*.html', '!app/pages/*.html'],
                 dest: 'generated/js/angular-templates.js'
             }
         },
 
         // Validate our JavaScript code with JSHint
         jshint: {
-            all: ['app/js/**/*.js']
+            all: ['app/**/*.js']
         },
 
         karma: {
@@ -137,10 +137,10 @@ module.exports = function(grunt) {
                         'bower_components/angular/angular.js',
                         'bower_components/ui-router/release/angular-ui-router.js',
                         'bower_components/angular-mocks/angular-mocks.js',
-                        'app/js/**/*.module.js',
-                        'app/js/**/*.config.js',
-                        'app/js/**/*.run.js',
-                        'app/js/**/*.js',
+                        'app/**/*.module.js',
+                        'app/**/*.config.js',
+                        'app/**/*.run.js',
+                        'app/**/*.js',
                         'app/**/*.html'
                     ],
                     coverageReporter: {
@@ -151,7 +151,7 @@ module.exports = function(grunt) {
                     reporters: ['progress', 'coverage'],
                     preprocessors: {
                         'app/**/*.html': 'ng-html2js',
-                        'app/js/**/!(*spec).js': 'coverage'
+                        'app/**/!(*spec).js': 'coverage'
                     },
                     ngHtml2JsPreprocessor: {
                         moduleName: 'templates-generated'
@@ -199,7 +199,7 @@ module.exports = function(grunt) {
                 dest: 'docs',
                 startPage: '/api/app.controller:DashboardController'
             },
-            all: ['app/js/**/*.js']
+            all: ['app/**/*.js']
         },
 
         // Display OS specific errors on the developers PC when a grunt build fails
