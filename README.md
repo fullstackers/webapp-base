@@ -20,7 +20,7 @@ grunt build
 node index.js
 
 // Watch for changes to the code
-grunt watch
+grunt
 ```
 
 Now, direct your browser to http://localhost:3000/

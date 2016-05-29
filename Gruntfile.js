@@ -1,5 +1,9 @@
 module.exports = function(grunt) {
+    "use strict";
 
+    var serverPort = process.env.PORT || 3000;
+
+    grunt.loadNpmTasks('grunt-browser-sync');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
@@ -8,6 +12,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-express-server');
     grunt.loadNpmTasks('grunt-html2js');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-mkdir');
@@ -16,6 +21,23 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-notify');
 
     grunt.initConfig({
+
+        browserSync: {
+            options: {
+                watchTask: true,
+                reloadDebounce: 2000
+            },
+            dev: {
+                bsFiles: {
+                    src: [
+                        'generated/**/*.js',
+                        'generated/**/*.css',
+                        'generated/**/*.html'
+                    ]
+                },
+                port: serverPort
+            }
+        },
 
         // Remove dynamically generated directories
         clean: {
@@ -104,6 +126,15 @@ module.exports = function(grunt) {
             dist: {
                 files: {
                     'dist/css/app.css': ['generated/css/app.css']
+                }
+            }
+        },
+
+        express: {
+            dev: {
+                options: {
+                    port: serverPort,
+                    script: 'index.js'
                 }
             }
         },
@@ -225,11 +256,11 @@ module.exports = function(grunt) {
         // during development.
         watch: {
             dev: {
-                files: ['app/**/*.js', 'app/**/*.less', 'app/**/*.html', 'app/**/*.json'],
+                files: ['app/**/*.js', 'app/**/*.less', 'app/**/*.html', 'app/**/*.json', '!app/**/*.spec.js'],
                 tasks: ['build']
             },
             test: {
-                files: ['test/spec/**/*.js'],
+                files: ['app/**/*.spec.js'],
                 tasks: ['test']
             },
             grunt: {
@@ -241,6 +272,7 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.registerTask('default', ['express', 'browserSync', 'watch']);
     grunt.registerTask('build', ['jshint', 'mkdir:generated', 'html2js:generated', 'concat:client', 'ngAnnotate:generated', 'concat:generated', 'less:generated', 'copy:generated', 'karma']);
     grunt.registerTask('dist', ['build', 'mkdir:dist', 'copy:dist', 'uglify:dist', 'cssmin:dist']);
     grunt.registerTask('test', ['jshint', 'karma']);
