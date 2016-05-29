@@ -185,7 +185,9 @@ module.exports = function(grunt) {
                         'app/**/!(*spec).js': 'coverage'
                     },
                     ngHtml2JsPreprocessor: {
-                        moduleName: 'templates-generated'
+                        moduleName: 'templates-generated',
+                        prependPrefix: '../app/',
+                        stripPrefix: 'app/'
                     }
                 }
             }
