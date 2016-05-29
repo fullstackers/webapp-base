@@ -15,7 +15,6 @@
   "devDependencies": {
     "ui-router": "~0.2.15",
     "bootstrap": "~3.3.6",
-    "jquery": "~2.1.4",
     "angular": "^1.5.3",
     "angular-mocks": "^1.5.3"
   }
