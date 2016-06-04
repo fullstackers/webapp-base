@@ -1,25 +1,23 @@
-describe('HeaderController', function() {
+describe("HeaderController", function() {
     "use strict";
 
-    var controller, $scope, $rootScope;
+    var controller, $rootScope;
 
-    beforeEach(module('app'));
+    beforeEach(module("app"));
 
     beforeEach(inject(function(_$controller_, _$rootScope_) {
         $rootScope = _$rootScope_;
-        $scope = _$rootScope_.$new();
 
-        controller = _$controller_('HeaderController', {
-            $scope: $scope,
+        controller = _$controller_("HeaderController", {
             $rootScope: $rootScope
         });
     }));
 
-    it('should close the menu when navigating to another page', function() {
-        $scope.showMenu = true;
+    it("should close the menu when navigating to another page", function() {
+        controller.showMenu = true;
 
-        $rootScope.$emit('$stateChangeStart');
+        $rootScope.$emit("$stateChangeStart");
         
-        expect($scope.showMenu).toBe(false);
+        expect(controller.showMenu).toBe(false);
     });
 });

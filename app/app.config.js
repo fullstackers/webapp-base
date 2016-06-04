@@ -1,14 +1,14 @@
-(function(ng) {
+(function() {
     "use strict";
 
-    ng
-        .module('app')
+    angular
+        .module("app")
         .config(AppConfig);
 
     /* @ngInject */
     function AppConfig($urlRouterProvider, $locationProvider) {
-        $urlRouterProvider.otherwise('/dashboard');
-        $locationProvider.html5Mode(true).hashPrefix('!');
+        $urlRouterProvider.otherwise("/dashboard");
+        $locationProvider.html5Mode(true).hashPrefix("!");
     }
 
-})(angular);
+}());

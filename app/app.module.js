@@ -1,9 +1,9 @@
-(function(ng) {
+(function() {
     "use strict";
 
-    ng
-        .module('app', [
-            'ui.router', 
-            'templates-generated'
+    angular
+        .module("app", [
+            "ui.router", 
+            "templates-generated"
         ]);
-})(angular);
+}());

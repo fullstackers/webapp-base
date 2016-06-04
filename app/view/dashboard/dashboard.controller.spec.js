@@ -3,12 +3,12 @@ describe("Dashboard Controller", function() {
 
     var controller;
 
-    beforeEach(module('app'));
+    beforeEach(module("app"));
     beforeEach(inject(function($controller) {
-        controller = $controller('DashboardController', {});
+        controller = $controller("DashboardController", {});
     }));
 
-    it('should create the controller', function() {
+    it("should create the controller", function() {
         expect(controller).toBeDefined();
     });
 });

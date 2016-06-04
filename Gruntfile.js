@@ -12,6 +12,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-eslint');
     grunt.loadNpmTasks('grunt-express-server');
     grunt.loadNpmTasks('grunt-html2js');
     grunt.loadNpmTasks('grunt-karma');
@@ -25,7 +26,7 @@ module.exports = function(grunt) {
         browserSync: {
             options: {
                 watchTask: true,
-                reloadDebounce: 2000
+                reloadDebounce: 3000
             },
             dev: {
                 bsFiles: {
@@ -137,6 +138,11 @@ module.exports = function(grunt) {
                     script: 'index.js'
                 }
             }
+        },
+
+        // Code Quality
+        eslint: {
+            all: ['app/**/*.js']
         },
 
         // Convert Angular Templates to JavaScript
@@ -257,8 +263,12 @@ module.exports = function(grunt) {
         // Monitor development files and rebuild those files as needed for rapid feedback
         // during development.
         watch: {
+            css: {
+                files: ['app/**/*.less'],
+                tasks: ['less:generated']
+            },
             dev: {
-                files: ['app/**/*.js', 'app/**/*.less', 'app/**/*.html', 'app/**/*.json', '!app/**/*.spec.js'],
+                files: ['app/**/*.js', 'app/**/*.html', 'app/**/*.json', '!app/**/*.spec.js'],
                 tasks: ['build']
             },
             test: {
@@ -274,10 +284,11 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('default', ['express', 'browserSync', 'watch']);
-    grunt.registerTask('build', ['jshint', 'mkdir:generated', 'html2js:generated', 'concat:client', 'ngAnnotate:generated', 'concat:generated', 'less:generated', 'copy:generated', 'karma']);
+    grunt.registerTask('default', ['core-build', 'express', 'browserSync', 'watch']);
+    grunt.registerTask('core-build', ['mkdir:generated', 'html2js:generated', 'concat:client', 'ngAnnotate:generated', 'concat:generated', 'less:generated', 'copy:generated']);
+    grunt.registerTask('build', ['eslint', 'jshint', 'core-build', 'karma']);
     grunt.registerTask('dist', ['build', 'mkdir:dist', 'copy:dist', 'uglify:dist', 'cssmin:dist']);
-    grunt.registerTask('test', ['jshint', 'karma']);
+    grunt.registerTask('test', ['eslint', 'jshint', 'karma']);
 
     // When a grunt build fails, display OS specific notifications on the screen
     grunt.task.run('notify_hooks');

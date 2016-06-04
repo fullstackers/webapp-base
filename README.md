@@ -1,7 +1,6 @@
 Have a working AngularJS application up and running in minutes.
 
 * AngularJS
-* ui-router
 * Bootstrap
 * Less
 
@@ -13,13 +12,7 @@ npm install
 // Download the Client-side dependencies
 bower install
 
-// Build the application files
-grunt build
-
-// Start the web server
-node index.js
-
-// Watch for changes to the code
+// Build, Start the server and watch for changes
 grunt
 ```
 

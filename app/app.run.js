@@ -1,11 +1,11 @@
-(function(ng) {
+(function() {
     "use strict";
 
-    ng
-        .module('app')
+    angular
+        .module("app")
         .run(AppRun);
 
     /* @ngInject */
     function AppRun() {}
 
-})(angular);
+}());

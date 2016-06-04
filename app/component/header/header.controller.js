@@ -1,4 +1,4 @@
-(function(ng) {
+(function() {
     "use strict";
 
     /**
@@ -10,15 +10,21 @@
      * @requires $scope
      * @requires $rootScope
      */
-    ng
-        .module('app')
-        .controller('HeaderController', HeaderController);
+    angular
+        .module("app")
+        .controller("HeaderController", HeaderController);
 
     /* @ngInject */
-    function HeaderController($scope, $rootScope) {
-        $rootScope.$on('$stateChangeStart', function() {
-            $scope.showMenu = false;
+    function HeaderController($rootScope) {
+        var vm = this;
+
+        var showMenuListener = $rootScope.$on("$stateChangeStart", function() {
+            vm.showMenu = false;
+        });
+
+        $rootScope.$on("$destroy", function() {
+            showMenuListener();
         });
     }
 
-})(angular);
+}());

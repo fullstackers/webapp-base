@@ -1,4 +1,4 @@
-(function(ng) {
+(function() {
     "use strict";
 
     /**
@@ -7,9 +7,9 @@
      * @description
      * The `TestService` represents a template for creating services within webapp-base
      */
-    ng
-        .module('app')
-        .factory('TestService', TestService);
+    angular
+        .module("app")
+        .factory("TestService", TestService);
 
     /* @ngInject */
     function TestService() {
@@ -33,4 +33,4 @@
         }        
     }
 
-})(angular);
+}());
