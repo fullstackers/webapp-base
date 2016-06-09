@@ -25,15 +25,15 @@ module.exports = function(grunt) {
 
         browserSync: {
             options: {
+                injectChanges: true,
                 watchTask: true,
                 reloadDebounce: 3000
             },
             dev: {
                 bsFiles: {
                     src: [
-                        'generated/**/*.js',
-                        'generated/**/*.css',
-                        'generated/**/*.html'
+                        'generated/css/app.css',
+                        'generated/index.html'
                     ]
                 },
                 port: serverPort
