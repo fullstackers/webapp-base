@@ -27,7 +27,8 @@ module.exports = function(grunt) {
             options: {
                 injectChanges: true,
                 watchTask: true,
-                reloadDebounce: 3000
+                reloadDebounce: 3000,
+                proxy: 'localhost' + serverPort
             },
             dev: {
                 bsFiles: {
@@ -36,7 +37,6 @@ module.exports = function(grunt) {
                         'generated/index.html'
                     ]
                 },
-                port: serverPort
             }
         },
 
