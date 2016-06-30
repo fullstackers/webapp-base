@@ -5,8 +5,8 @@
         "no-alert": 2,
         "no-caller": 2,
         "no-bitwise": 0,
-        "no-console": 2,
-        "no-debugger": 2,
+        "no-console": 1,
+        "no-debugger": 1,
         "no-empty": 2,
         "no-eval": 1,
         "no-ex-assign": 2,
@@ -48,6 +48,8 @@
         "max-statements": [0, 10],
         "complexity": [0, 11],
         "wrap-iife": 1,
-        "no-multi-str": 2
+        "no-multi-str": 2,
+        
+        "angular/log": 1
     }
 }
