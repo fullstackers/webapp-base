@@ -8,6 +8,12 @@ Have a working AngularJS application up and running in minutes.
 * Less
 * Grunt
 
+## AngularJS Best Practices
+
+This project is intended to adhere to the best practices defined in the John Papa Style Guide.
+
+https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md
+
 ## Setup Instructions
 ```
 // Install the NodeJS dependencies
