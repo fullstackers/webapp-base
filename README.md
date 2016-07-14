@@ -30,10 +30,12 @@ Now, direct your browser to http://localhost:3000/
 
 ## Grunt targets
 
-* grunt
-* grunt build
-* grunt deploy
-* grunt test
+* `grunt`
+* `grunt build`
+* `grunt deploy`
+* `grunt clean`
+* `grunt test`
+* `grunt ngdocs`
 
 ## Code Quality and Unit Tests
 
