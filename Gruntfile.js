@@ -288,6 +288,7 @@ module.exports = function(grunt) {
     grunt.registerTask('core-build', ['mkdir:generated', 'html2js:generated', 'concat:client', 'ngAnnotate:generated', 'concat:generated', 'less:generated', 'copy:generated']);
     grunt.registerTask('build', ['eslint', 'jshint', 'core-build', 'karma']);
     grunt.registerTask('dist', ['build', 'mkdir:dist', 'copy:dist', 'uglify:dist', 'cssmin:dist']);
+    grunt.registerTask('deploy', ['dist']);
     grunt.registerTask('test', ['eslint', 'jshint', 'karma']);
 
     // When a grunt build fails, display OS specific notifications on the screen
