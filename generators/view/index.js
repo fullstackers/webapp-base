@@ -9,7 +9,7 @@ this.destinationRoot('../../app/');
   },
   initializing: function() {
   	this.viewName = this.arguments[0];
-    this.viewNameCapital = this.viewName.substr(0,1) + this.viewName.substr(1);
+    this.viewNameCapital = this.viewName.substr(0,1).toUpperCase() + this.viewName.substr(1);
   },
   writing: function () {
   	// this.mkdir(`${this.destinationRoot()}/app/view/${this.viewName}`);
