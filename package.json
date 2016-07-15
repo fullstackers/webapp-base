@@ -1,9 +1,10 @@
 {
-  "name": "webapp-base",
+  "name": "generator-webapp",
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "app-update": "npm install && bower install && npm link"
   },
   "author": "Paul Forbes <paulforbes42@gmail.com>",
   "devDependencies": {
@@ -22,6 +23,7 @@
     "grunt-contrib-uglify": "^0.11.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-eslint": "^18.1.0",
+    "grunt-exec": "^1.0.0",
     "grunt-express-server": "^0.5.3",
     "grunt-html2js": "^0.3.5",
     "grunt-karma": "^0.12.1",
@@ -35,9 +37,17 @@
     "karma-jasmine": "^0.3.6",
     "karma-ng-html2js-preprocessor": "^0.2.0",
     "karma-phantomjs-launcher": "^1.0.0",
-    "phantomjs": "^1.9.17"
+    "phantomjs": "^1.9.17",
+    "yeoman-generator": "^0.21.2"
   },
+  "files": [
+    "generators/view"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
   "dependencies": {
-    "compression": "^1.6.0"
+    "compression": "^1.6.0",
+    "yo": "^1.8.4"
   }
 }
