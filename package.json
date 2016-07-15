@@ -38,7 +38,8 @@
     "karma-ng-html2js-preprocessor": "^0.2.0",
     "karma-phantomjs-launcher": "^1.0.0",
     "phantomjs": "^1.9.17",
-    "yeoman-generator": "^0.21.2"
+    "yeoman-generator": "^0.21.2",
+    "yo": "^1.8.4"
   },
   "files": [
     "generators/view"
@@ -47,7 +48,6 @@
     "yeoman-generator"
   ],
   "dependencies": {
-    "compression": "^1.6.0",
-    "yo": "^1.8.4"
+    "compression": "^1.6.0"
   }
 }

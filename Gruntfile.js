@@ -299,9 +299,9 @@ module.exports = function(grunt) {
     grunt.registerTask('dist', ['build', 'mkdir:dist', 'copy:dist', 'uglify:dist', 'cssmin:dist']);
     grunt.registerTask('test', ['eslint', 'jshint', 'karma']);
 
-    var view = grunt.option('view');
-    grunt.registerTask('yo-view', ['exec:yo:view:' + view]);
-
+    grunt.task.registerTask('yo', 'Yeoman task', function(generator, name) {
+        grunt.task.run(`exec:${this.name}:${generator}:${name}`);
+    });
     // When a grunt build fails, display OS specific notifications on the screen
     grunt.task.run('notify_hooks');
 };
