@@ -1,14 +1,14 @@
-describe("Dashboard Controller", function() {
-    "use strict";
+describe("<%= viewNameCapital %> Controller", function() {
+  "use strict";
 
-    var controller;
+  var controller;
 
-    beforeEach(module("app"));
-    beforeEach(inject(function($controller) {
-        controller = $controller("DashboardController", {});
-    }));
+  beforeEach(module("app"));
+  beforeEach(inject(function($controller) {
+    controller = $controller("<%= viewNameCapital %>Controller", {});
+  }));
 
-    it("should create the controller", function() {
-        expect(controller).toBeDefined();
-    });
+  it("should create the controller", function() {
+    expect(controller).toBeDefined();
+  });
 });

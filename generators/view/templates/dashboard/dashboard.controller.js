@@ -3,16 +3,16 @@
 
     /**
      * @ngdoc controller
-     * @name app.controller:DashboardController
+     * @name app.controller:<%= viewNameCapital %>Controller
      * @description
-     * Dashboard Controller manages the interactions on the dashboard
+     * <%= viewNameCapital %> Controller manages the interactions on the <%= viewName %>
      */
     angular
         .module("app")
-        .controller("DashboardController", DashboardController);
+        .controller("<%= viewNameCapital %>Controller", <%= viewNameCapital %>Controller);
 
     /* @ngInject */
-    function DashboardController() {
+    function <%= viewNameCapital %>Controller() {
 
     }
 
