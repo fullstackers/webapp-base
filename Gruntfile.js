@@ -78,7 +78,7 @@ module.exports = function(grunt) {
         exec: {
             yo: {
                 cmd: function(generator, name) {
-                  return "cd node_modules && cd .bin && yo webapp:" + generator + ' ' + name;
+                  return `cd node_modules && cd .bin && yo webapp:${generator} ${name}`;
                 }
             }
         },
