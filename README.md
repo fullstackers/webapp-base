@@ -36,3 +36,9 @@ Now, direct your browser to http://localhost:3000/
 * eslint
 * jshint
 * karma / jasmine
+
+## Generating Views
+
+To generate all the files for a new view, run the following command replacing `{viewName}` with the name of the page you would like to create.
+
+`grunt yo:view:{viewName}`
