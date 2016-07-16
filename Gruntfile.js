@@ -78,8 +78,9 @@ module.exports = function(grunt) {
         exec: {
             yo: {
                 cmd: function(generator, name) {
-                  return "./node_modules/yo/lib/cli.js webapp:"+generator+" "+name;
-                }
+                  return "node node_modules/yo/lib/cli.js webapp:"+generator+" "+name;
+		}
+                
             }
         },
 
