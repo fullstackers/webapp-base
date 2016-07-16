@@ -78,7 +78,7 @@ module.exports = function(grunt) {
         exec: {
             yo: {
                 cmd: function(generator, name) {
-                  return `cd node_modules && cd .bin && yo webapp:${generator} ${name}`;
+                  return "./node_modules/yo/lib/cli.js webapp:"+generator+" "+name;
                 }
             }
         },
@@ -300,7 +300,7 @@ module.exports = function(grunt) {
     grunt.registerTask('test', ['eslint', 'jshint', 'karma']);
 
     grunt.task.registerTask('yo', 'Yeoman task', function(generator, name) {
-        grunt.task.run(`exec:${this.name}:${generator}:${name}`);
+        grunt.task.run("exec:"+this.name+":"+generator+":"+name);
     });
     // When a grunt build fails, display OS specific notifications on the screen
     grunt.task.run('notify_hooks');

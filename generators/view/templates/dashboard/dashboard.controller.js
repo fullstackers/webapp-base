@@ -5,7 +5,7 @@
    * @ngdoc controller
    * @name app.controller:<%= viewNameCapital %>Controller
    * @description
-   * <%= viewNameCapital %> Controller manages the interactions on the <%= viewName %>
+   * <%= viewNameCapital %> Controller
    */
   angular
     .module("app")
