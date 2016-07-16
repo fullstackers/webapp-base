@@ -20,9 +20,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-ng-annotate');
     grunt.loadNpmTasks('grunt-ngdocs');
     grunt.loadNpmTasks('grunt-notify');
+    grunt.loadNpmTasks('grunt-exec');
 
     grunt.initConfig({
-
+        
         browserSync: {
             options: {
                 injectChanges: true,
@@ -74,6 +75,15 @@ module.exports = function(grunt) {
                 dest: 'generated/js/app.js'
             }
         },
+        exec: {
+            yo: {
+                cmd: function(generator, name) {
+                  return "node node_modules/yo/lib/cli.js webapp:"+generator+" "+name;
+		}
+                
+            }
+        },
+
 
         // Copy static files to the generated directory
         copy: {
@@ -291,6 +301,9 @@ module.exports = function(grunt) {
     grunt.registerTask('deploy', ['dist']);
     grunt.registerTask('test', ['eslint', 'jshint', 'karma']);
 
+    grunt.task.registerTask('yo', 'Yeoman task', function(generator, name) {
+        grunt.task.run("exec:"+this.name+":"+generator+":"+name);
+    });
     // When a grunt build fails, display OS specific notifications on the screen
     grunt.task.run('notify_hooks');
 };
