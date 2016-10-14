@@ -13,7 +13,7 @@ describe("HeaderController", function() {
         });
     }));
 
-    it("should close the menu when navigating to another page", function() {
+    xit("should close the menu when navigating to another page", function() {
         controller.showMenu = true;
 
         $rootScope.$emit("$stateChangeStart");

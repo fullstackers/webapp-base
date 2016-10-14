@@ -7,11 +7,13 @@
     "app-update": "npm install && bower install && npm link"
   },
   "author": "Paul Forbes <paulforbes42@gmail.com>",
-  "devDependencies": {
+  "dependencies": {
+    "compression": "^1.6.0",
     "eslint-config-angular": "^0.5.0",
     "eslint-plugin-angular": "^1.0.1",
     "express": "^4.13.1",
     "grunt": "^0.4.5",
+    "grunt-bower-concat": "^1.0.0",
     "grunt-browser-sync": "^2.2.0",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-clean": "^0.7.0",
@@ -37,6 +39,7 @@
     "karma-jasmine": "^0.3.6",
     "karma-ng-html2js-preprocessor": "^0.2.0",
     "karma-phantomjs-launcher": "^1.0.0",
+    "less-plugin-glob": "^1.1.1",
     "phantomjs": "^1.9.17",
     "yeoman-generator": "^0.21.2",
     "yo": "^1.8.4"
@@ -46,8 +49,5 @@
   ],
   "keywords": [
     "yeoman-generator"
-  ],
-  "dependencies": {
-    "compression": "^1.6.0"
-  }
+  ]
 }
