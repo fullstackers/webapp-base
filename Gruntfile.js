@@ -192,7 +192,6 @@ module.exports = function (grunt) {
 						'bower_components/angular-bootstrap/ui-bootstrap.js',
 						'bower_components/ui-router/release/angular-ui-router.js',
 						'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-						'bower_components/angular-gridster/dist/angular-gridster.min.js',
 						'bower_components/angular-mocks/angular-mocks.js',
 						'app/**/*.module.js',
 						'app/**/*.config.js',
