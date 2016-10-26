@@ -329,7 +329,6 @@ module.exports = function (grunt) {
 	grunt.registerTask('build', ['eslint', 'jshint', 'core-build', 'karma']);
 	grunt.registerTask('dist', ['build', 'mkdir:dist', 'copy:dist', 'uglify:dist', 'cssmin:dist']);
 	grunt.registerTask('deploy', ['dist']);
-  grunt.registerTask('build-deploy', ['core-build', 'mkdir:dist', 'copy:dist', 'uglify:dist', 'cssmin:dist']);
 	grunt.registerTask('test', ['eslint', 'jshint', 'karma']);
 
 	grunt.task.registerTask('yo', 'Yeoman task', function (generator, name) {
