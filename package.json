@@ -49,5 +49,8 @@
   ],
   "keywords": [
     "yeoman-generator"
-  ]
+  ],
+  "devDependencies": {
+    "karma-junit-reporter": "^1.1.0"
+  }
 }

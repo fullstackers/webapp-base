@@ -208,11 +208,16 @@ module.exports = function (grunt) {
 								type: 'html'
 							}]
 					},
-					reporters: ['progress', 'coverage'],
+					reporters: ['junit', 'progress', 'coverage'],
 					preprocessors: {
 						'app/**/*.html': 'ng-html2js',
 						'app/**/!(*spec).js': 'coverage'
 					},
+          junitReporter: {
+            outputDir: './',
+            outputFile: 'test-results.xml',
+            useBrowserName: false
+          },
 					ngHtml2JsPreprocessor: {
 						moduleName: 'templates-generated',
 						prependPrefix: '../app/',
