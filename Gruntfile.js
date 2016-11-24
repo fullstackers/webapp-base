@@ -3,6 +3,7 @@ module.exports = function (grunt) {
 
 	var serverPort = process.env.PORT || 3000;
 
+  grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-browser-sync');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-concat');
@@ -23,9 +24,15 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-exec');
 	grunt.loadNpmTasks('grunt-bower-concat');
 
-
 	grunt.initConfig({
-
+    autoprefixer: {
+      options: {
+        browsers: ['> 1% in US']
+      },
+      generated: {
+        src: 'generated/css/app.css'
+      }
+    },
 		browserSync: {
 			options: {
 				injectChanges: true,
@@ -141,8 +148,8 @@ module.exports = function (grunt) {
 		cssmin: {
 			dist: {
 				files: {
-					'dist/css/app.css': ['generated/css/app.css'],
-					'dist/css/bower.css': ['generated/css/bower.css']
+					'dist/css/app.css': ['generated/css/app.css']//,
+					//'dist/css/bower.css': ['generated/css/bower.css']
 				}
 			}
 		},
@@ -317,8 +324,8 @@ module.exports = function (grunt) {
 		bower_concat: {
 			all: {
 				dest: {
-					'js': 'generated/js/vendor.js',
-					'css': 'generated/css/bower.css'
+					'js': 'generated/js/vendor.js'//,
+					//'css': 'generated/css/bower.css'
 				},
 				bowerOptions: {
 					relative: false
@@ -329,7 +336,19 @@ module.exports = function (grunt) {
 	});
 
 	grunt.registerTask('default', ['core-build', 'express', 'browserSync', 'watch']);
-	grunt.registerTask('core-build', ['mkdir:generated', 'html2js:generated', 'concat:client', 'ngAnnotate:generated', 'concat:generated', 'less:generated', 'copy:generated', 'bower_concat']);
+
+	grunt.registerTask('core-build', [
+    'mkdir:generated',
+    'html2js:generated',
+    'concat:client',
+    'ngAnnotate:generated',
+    'concat:generated',
+    'less:generated',
+    'autoprefixer:generated',
+    'copy:generated',
+    'bower_concat'
+  ]);
+
 	grunt.registerTask('build', ['eslint', 'jshint', 'core-build', 'karma']);
 	grunt.registerTask('dist', ['build', 'mkdir:dist', 'copy:dist', 'uglify:dist', 'cssmin:dist']);
 	grunt.registerTask('deploy', ['dist']);
@@ -338,6 +357,7 @@ module.exports = function (grunt) {
 	grunt.task.registerTask('yo', 'Yeoman task', function (generator, name) {
 		grunt.task.run("exec:" + this.name + ":" + generator + ":" + name);
 	});
+
 	// When a grunt build fails, display OS specific notifications on the screen
 	grunt.task.run('notify_hooks');
 };
