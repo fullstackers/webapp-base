@@ -3,32 +3,32 @@ module.exports = function (grunt) {
 
 	var serverPort = process.env.PORT || 3000;
 
+  grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-browser-sync');
 	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-less');
-	grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-symlink');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-eslint');
 	grunt.loadNpmTasks('grunt-express-server');
+	grunt.loadNpmTasks('grunt-exec');
+  grunt.loadNpmTasks('grunt-filerev');
 	grunt.loadNpmTasks('grunt-html2js');
 	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-mkdir');
 	grunt.loadNpmTasks('grunt-ng-annotate');
 	grunt.loadNpmTasks('grunt-ngdocs');
 	grunt.loadNpmTasks('grunt-notify');
-	grunt.loadNpmTasks('grunt-exec');
-	grunt.loadNpmTasks('grunt-bower-concat');
-
-  grunt.loadNpmTasks('grunt-autoprefixer');
-	grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-symlink');
   grunt.loadNpmTasks('grunt-usemin');
   grunt.loadNpmTasks('grunt-wiredep');
 
 	grunt.initConfig({
+
     autoprefixer: {
       options: {
         browsers: ['> 1% in US']
@@ -37,6 +37,7 @@ module.exports = function (grunt) {
         src: 'generated/css/app.css'
       }
     },
+
 		browserSync: {
 			options: {
 				injectChanges: true,
@@ -54,11 +55,10 @@ module.exports = function (grunt) {
 		// Remove dynamically generated directories
 		clean: {
 			generated: ['generated'],
-			dist: ['dist']
+			dist: ['dist'],
+      tmp: ['.tmp']
 		},
 
-		// Concatenate JavaScript files together into a single file
-    
 		exec: {
 			yo: {
 				cmd: function (generator, name) {
@@ -67,7 +67,6 @@ module.exports = function (grunt) {
 
 			}
 		},
-
 
 		// Copy static files to the generated directory
 		copy: {
@@ -127,16 +126,6 @@ module.exports = function (grunt) {
 			}
 		},
 
-		// Minify CSS files for production
-		cssmin: {
-			dist: {
-				files: {
-					'dist/css/app.css': ['generated/css/app.css']//,
-					//'dist/css/bower.css': ['generated/css/bower.css']
-				}
-			}
-		},
-
 		express: {
 			dev: {
 				options: {
@@ -150,6 +139,19 @@ module.exports = function (grunt) {
 		eslint: {
 			all: ['app/**/*.js']
 		},
+
+    filerev: {
+      options: {
+        algorithm: 'md5',
+        length: 16
+      },
+      js: {
+        src: 'dist/js/app.js'
+      },
+			css: {
+				src: 'dist/css/app.css'
+			}
+    },
 
 		// Convert Angular Templates to JavaScript
 		html2js: {
@@ -205,7 +207,14 @@ module.exports = function (grunt) {
 						prependPrefix: '../app/',
 						stripPrefix: 'app/'
 					},
-          plugins: ['karma-wiredep', 'karma-coverage', 'karma-ng-html2js-preprocessor', 'karma-junit-reporter', 'karma-jasmine', 'karma-phantomjs-launcher']
+          plugins: [
+            'karma-wiredep', 
+            'karma-coverage', 
+            'karma-ng-html2js-preprocessor', 
+            'karma-junit-reporter', 
+            'karma-jasmine', 
+            'karma-phantomjs-launcher'
+          ]
 				}
 			}
 		},
@@ -271,21 +280,11 @@ module.exports = function (grunt) {
     symlink: {
       generated: {
         files: [
-          { src: 'bower_components', dest: 'generated/bower_components' },
-    //      { src: 'app', dest: 'generated/app' }
+          { src: 'bower_components', dest: 'generated/bower_components' }
         ]
       }
     },
-/*
-		uglify: {
-			dist: {
-				files: {
-					'dist/js/app.js': 'generated/js/app.js',
-					'dist/js/vendor.js': 'generated/js/vendor.js'
-				}
-			}
-		},
-*/
+
     usemin: {
       html: 'dist/index.html'
     },
@@ -334,20 +333,7 @@ module.exports = function (grunt) {
           }
         }
       }
-    },
-/*
-		bower_concat: {
-			all: {
-				dest: {
-					'js': 'generated/js/vendor.js'//,
-					//'css': 'generated/css/bower.css'
-				},
-				bowerOptions: {
-					relative: false
-				}
-			}
-		}
-*/
+    }
 	});
 
 	grunt.registerTask('default', ['core-build', 'express', 'browserSync', 'watch']);
@@ -356,17 +342,10 @@ module.exports = function (grunt) {
     'mkdir:generated',
     'symlink:generated',
     'html2js:generated',
-
-//    'concat:client',
-//    'ngAnnotate:generated',
-//    'concat:generated',
     'less:generated',
     'autoprefixer:generated',
     'copy:generated',
-
     'wiredep:generated'
-
-//    'bower_concat'
   ]);
 
 	grunt.registerTask('build', ['eslint', 'jshint', 'core-build', 'karma']);
@@ -376,23 +355,19 @@ module.exports = function (grunt) {
     'ngAnnotate:dist',
     'mkdir:dist', 
     'copy:dist',
+
     'useminPrepare',
     'concat:generated',
     'uglify:generated',
-    //'uglify:dist', 
-    'cssmin:dist',
+    'cssmin:generated',
+    'filerev',
     'usemin'
   ]);
-/*
-	grunt.registerTask('dist', [
-    'build', 
-    'mkdir:dist', 
-    'copy:dist', 
-    'uglify:dist', 
-    'cssmin:dist'
-  ]);
-*/
+
+  // Alias for dist
 	grunt.registerTask('deploy', ['dist']);
+
+  // Code quality task
 	grunt.registerTask('test', ['eslint', 'jshint', 'karma']);
 
 	grunt.task.registerTask('yo', 'Yeoman task', function (generator, name) {
