@@ -1,6 +1,6 @@
 {
   "name": "webapp-base",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "authors": [
     "Paul Forbes <paulforbes42@gmail.com>"
   ],
@@ -11,6 +11,12 @@
     "bower_components",
     "test",
     "tests"
+  ],
+  "main": [
+    "app/**/*.module.js",
+    "app/**/*.config.js",
+    "app/**/*.run.js",
+    "app/**/*.js"
   ],
   "dependencies": {
     "ui-router": "~0.2.15",

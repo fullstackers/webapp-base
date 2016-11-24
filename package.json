@@ -34,6 +34,7 @@
     "grunt-ng-annotate": "^2.0.2",
     "grunt-ngdocs": "^0.2.9",
     "grunt-notify": "^0.4.2",
+    "grunt-wiredep": "^3.0.1",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.9",
     "karma-coverage": "^0.5.3",
@@ -52,6 +53,9 @@
     "yeoman-generator"
   ],
   "devDependencies": {
-    "karma-junit-reporter": "^1.1.0"
+    "grunt-contrib-symlink": "^1.0.0",
+    "grunt-usemin": "^3.1.1",
+    "karma-junit-reporter": "^1.1.0",
+    "karma-wiredep": "^1.0.3"
   }
 }

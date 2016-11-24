@@ -3,10 +3,8 @@ module.exports = function (grunt) {
 
 	var serverPort = process.env.PORT || 3000;
 
-  grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-browser-sync');
 	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -23,6 +21,12 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-notify');
 	grunt.loadNpmTasks('grunt-exec');
 	grunt.loadNpmTasks('grunt-bower-concat');
+
+  grunt.loadNpmTasks('grunt-autoprefixer');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-symlink');
+  grunt.loadNpmTasks('grunt-usemin');
+  grunt.loadNpmTasks('grunt-wiredep');
 
 	grunt.initConfig({
     autoprefixer: {
@@ -54,31 +58,7 @@ module.exports = function (grunt) {
 		},
 
 		// Concatenate JavaScript files together into a single file
-		concat: {
-			options: {
-				separator: ';'
-			},
-			client: {
-				src: [
-					'app/**/*.module.js',
-					'app/**/*.config.js',
-					'app/**/*.run.js',
-					'app/**/*.js',
-					'!app/**/*.spec.js'
-				],
-				dest: 'generated/js/client.js'
-			},
-			generated: {
-				options: {
-					separator: ';'
-				},
-				src: [
-					'generated/js/client.js',
-					'generated/js/angular-templates.js'
-				],
-				dest: 'generated/js/app.js'
-			}
-		},
+    
 		exec: {
 			yo: {
 				cmd: function (generator, name) {
@@ -101,28 +81,31 @@ module.exports = function (grunt) {
 					dest: 'generated/',
 					filter: 'isFile'
 				},
-					// Copy image files from the img/ directory to the img/ directory of generated/
-					{
-						expand: true,
-						flatten: true,
-						src: ['app/img/**/*'],
-						dest: 'generated/img/'
-					},
-					// Copy bootstrap fonts to the generated directory
-					{
-						expand: true,
-						flatten: true,
-						src: ['bower_components/bootstrap/fonts/**/*'],
-						dest: 'generated/fonts'
-					},
-					// Font-Awesome Font
-					{
-						expand: true,
-						flatten: true,
-						src: ['bower_components/font-awesome/fonts/**/*'],
-						dest: 'generated/fonts'
-					},
-				]
+        // Copy image files from the img/ directory to the img/ directory of generated/
+        {
+          expand: true,
+          flatten: true,
+          src: ['app/img/**/*'],
+          dest: 'generated/img/'
+        },
+        // Copy bootstrap fonts to the generated directory
+        {
+          expand: true,
+          flatten: true,
+          src: ['bower_components/bootstrap/fonts/**/*'],
+          dest: 'generated/fonts'
+        },
+        // Font-Awesome Font
+        {
+          expand: true,
+          flatten: true,
+          src: ['bower_components/font-awesome/fonts/**/*'],
+          dest: 'generated/fonts'
+        }, {
+          expand: true,
+          src: ['app/**/*.js', '!app/**/*.spec.js'],
+          dest: 'generated/'
+        }]
 			},
 			dist: {
 				files: [{
@@ -190,31 +173,23 @@ module.exports = function (grunt) {
 		karma: {
 			unit: {
 				options: {
-					frameworks: ['jasmine'],
+					frameworks: ['wiredep', 'jasmine'],
 					singleRun: true,
 					browsers: ['PhantomJS'],
-					files: [
-						'bower_components/jquery/dist/jquery.js',
-						'bower_components/angular/angular.js',
-						'bower_components/angular-bootstrap/ui-bootstrap.js',
-						'bower_components/ui-router/release/angular-ui-router.js',
-						'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-						'bower_components/angular-mocks/angular-mocks.js',
-						'app/**/*.module.js',
-						'app/**/*.config.js',
-						'app/**/*.run.js',
-						'app/**/*.js',
-						'app/**/*.html'
-					],
 					coverageReporter: {
 						reporters: [
-							{
-								type: 'text'
-							},
-							{
-								type: 'html'
-							}]
+							{ type: 'text' },
+							{ type: 'html' }
+            ]
 					},
+          files: [
+            'app/**/*.spec.js',
+            'app/**/*.module.js',
+            'app/**/*.config.js',
+            'app/**/*.run.js',
+            'app/**/*.js',
+            'app/**/*.html'
+          ],
 					reporters: ['junit', 'progress', 'coverage'],
 					preprocessors: {
 						'app/**/*.html': 'ng-html2js',
@@ -229,7 +204,8 @@ module.exports = function (grunt) {
 						moduleName: 'templates-generated',
 						prependPrefix: '../app/',
 						stripPrefix: 'app/'
-					}
+					},
+          plugins: ['karma-wiredep', 'karma-coverage', 'karma-ng-html2js-preprocessor', 'karma-junit-reporter', 'karma-jasmine', 'karma-phantomjs-launcher']
 				}
 			}
 		},
@@ -262,12 +238,14 @@ module.exports = function (grunt) {
 
 		ngAnnotate: {
 			options: {
-				remove: true,
+				remove: true
 			},
-			generated: {
-				files: {
-					'generated/js/client.js': ['generated/js/client.js']
-				}
+			dist: {
+				files: [{
+          expand: true,
+          src: ['generated/app/**/*.js'],
+          dest: '.'
+				}]
 			}
 		},
 
@@ -290,6 +268,15 @@ module.exports = function (grunt) {
 			}
 		},
 
+    symlink: {
+      generated: {
+        files: [
+          { src: 'bower_components', dest: 'generated/bower_components' },
+    //      { src: 'app', dest: 'generated/app' }
+        ]
+      }
+    },
+/*
 		uglify: {
 			dist: {
 				files: {
@@ -298,6 +285,18 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+*/
+    usemin: {
+      html: 'dist/index.html'
+    },
+
+    useminPrepare: {
+      html: 'dist/index.html',
+      options: {
+        dest: 'dist',
+        root: 'generated'
+      }
+    },
 
 		// Monitor development files and rebuild those files as needed for rapid feedback
 		// during development.
@@ -321,6 +320,22 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+
+    wiredep: {
+      generated: {
+        bowerJson: require("./bower.json"),
+        cwd: "generated",
+        exclude: [/spec\.js/],
+        includeSelf: true,
+        src: ['generated/index.html'],
+        overrides: {
+          bootstrap: {
+            main: ["dist/css/bootstrap.css"]
+          }
+        }
+      }
+    },
+/*
 		bower_concat: {
 			all: {
 				dest: {
@@ -332,25 +347,51 @@ module.exports = function (grunt) {
 				}
 			}
 		}
-
+*/
 	});
 
 	grunt.registerTask('default', ['core-build', 'express', 'browserSync', 'watch']);
 
 	grunt.registerTask('core-build', [
     'mkdir:generated',
+    'symlink:generated',
     'html2js:generated',
-    'concat:client',
-    'ngAnnotate:generated',
-    'concat:generated',
+
+//    'concat:client',
+//    'ngAnnotate:generated',
+//    'concat:generated',
     'less:generated',
     'autoprefixer:generated',
     'copy:generated',
-    'bower_concat'
+
+    'wiredep:generated'
+
+//    'bower_concat'
   ]);
 
 	grunt.registerTask('build', ['eslint', 'jshint', 'core-build', 'karma']);
-	grunt.registerTask('dist', ['build', 'mkdir:dist', 'copy:dist', 'uglify:dist', 'cssmin:dist']);
+
+	grunt.registerTask('dist', [
+    'build', 
+    'ngAnnotate:dist',
+    'mkdir:dist', 
+    'copy:dist',
+    'useminPrepare',
+    'concat:generated',
+    'uglify:generated',
+    //'uglify:dist', 
+    'cssmin:dist',
+    'usemin'
+  ]);
+/*
+	grunt.registerTask('dist', [
+    'build', 
+    'mkdir:dist', 
+    'copy:dist', 
+    'uglify:dist', 
+    'cssmin:dist'
+  ]);
+*/
 	grunt.registerTask('deploy', ['dist']);
 	grunt.registerTask('test', ['eslint', 'jshint', 'karma']);
 
