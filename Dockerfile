@@ -1,5 +1,5 @@
 FROM node:7.2-onbuild
-RUN echo '{ "allow_root": true }' > /root/.bowerrc
+
 RUN npm install
 RUN npm run install-client
 
