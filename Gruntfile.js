@@ -387,6 +387,8 @@ module.exports = function (grunt) {
   // Code quality task
   grunt.registerTask('test', ['eslint', 'jshint', 'karma']);
 
+  grunt.registerTask('e2e', ['core-build', 'express', 'browserSync', 'protractor']);
+
   grunt.task.registerTask('yo', 'Yeoman task', function (generator, name) {
     grunt.task.run("exec:" + this.name + ":" + generator + ":" + name);
   });
