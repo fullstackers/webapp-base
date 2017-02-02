@@ -1,11 +1,11 @@
 (function () {
-	"use strict";
+  "use strict";
 
-	angular
-		.module("app", [
-			"ui.router",
-			"ui.bootstrap",
-			"templates-generated"
+  angular
+    .module("app", [
+      "ui.router",
+      "ui.bootstrap",
+      "templates-generated"
 
-		]);
+    ]);
 }());
