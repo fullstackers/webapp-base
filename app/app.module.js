@@ -5,7 +5,8 @@
     .module("app", [
       "ui.router",
       "ui.bootstrap",
-      "templates-generated"
+      "templates-generated",
+      "md-responsive-sidenav"
 
     ]);
 }());
