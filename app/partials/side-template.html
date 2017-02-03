@@ -1,6 +1,6 @@
 <md-menu-content>
-  <md-menu-item ng-repeat="link in ['Dashboard', 'Test', 'Demo']">
-    <md-button class="md-secondary md-raised" ui-sref="{{link}}" ng-click="vm.closeNav()">{{link}}
+  <md-menu-item ng-repeat="link in ['dashboard', 'test']">
+    <md-button class="md-secondary md-raised" ui-sref="{{link}}" ng-click="vm.closeNav()">{{link | uppercase}}
     </md-button>
   </md-menu-item>
 </md-menu-content>
