@@ -7,10 +7,11 @@
                 <h1>Hello {{yourName}}!</h1>
             </div>
             <div class="panel-body">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/BKorP55Aqvg"
-                            frameborder="0" allowfullscreen></iframe>
-                </div>
+                List of Survey
+                <ol>
+                    <li ng-repeat="survey in vm.survey">{{survey.attributes.name}}
+                    </li>
+                </ol>
             </div>
         </div>
     </div>
