@@ -26,9 +26,20 @@
         var list = results;
         vm.survey = [];
         angular.forEach(list, function (data) {
-          vm.survey.push(data);
+          var sections = data.relation("Sections");
+          var query = sections.query();
+
+          query.find({
+            success: function (sections) {
+              data.sections = sections;
+              vm.survey.push(data);
+              $scope.$digest();
+            }
+          });
+
+          $scope.$digest();
+
         });
-        $scope.$digest();
       },
       error: function (error) {
         // The object was not retrieved successfully.
