@@ -9,7 +9,7 @@
   function AppRun() {
     Parse.initialize("APPLICATION_ID");
 
-    Parse.serverURL = "http://localhost:1337/parse";
+    Parse.serverURL = "http://158.69.200.50:4001/parse";
   }
 
 }());

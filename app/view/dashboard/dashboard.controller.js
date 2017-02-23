@@ -26,7 +26,7 @@
         var list = results;
         vm.survey = [];
         angular.forEach(list, function (data) {
-          var sections = data.relation("Sections");
+          var sections = data.relation("sections");
           var query = sections.query();
 
           query.find({

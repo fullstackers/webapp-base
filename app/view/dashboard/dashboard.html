@@ -10,6 +10,11 @@
                 List of Survey
                 <ol>
                     <li ng-repeat="survey in vm.survey">{{survey.attributes.name}}
+                        <ul>
+                            <li ng-repeat="section in survey.sections">
+                                {{section.attributes.name}}
+                            </li>
+                        </ul>
                     </li>
                 </ol>
             </div>
