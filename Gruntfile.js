@@ -186,7 +186,10 @@ module.exports = function (grunt) {
 
     // Validate our JavaScript code with JSHint
     jshint: {
-      all: ['app/**/*.js']
+      all: ['app/**/*.js'],
+      options: {
+        reporter: require('jshint-stylish')
+      }
     },
 
     karma: {
